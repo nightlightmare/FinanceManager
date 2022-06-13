@@ -1,0 +1,115 @@
+@import "styles/variables";
+
+.title {
+  display: flex;
+  color: var(--black);
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 30px;
+}
+
+.text {
+  @media (max-width: $mobile) {
+    flex: 1 0 auto;
+  }
+}
+
+.chevron {
+  flex: none;
+  margin-left: 3px;
+  transition: transform 0.3s;
+}
+
+.list {
+  position: absolute;
+  z-index: $z-overlay;
+  top: calc(100% + 25px);
+  left: 0;
+  max-width: 304px;
+  padding: 25px;
+  border: 1px solid var(--gray-frame);
+  background: var(--clean-white);
+  border-radius: 10px;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(0%) translateY(-15px);
+  transition: transform 0.3s, opacity 0.3s;
+
+  &::before {
+    position: absolute;
+    top: -30px;
+    right: 0;
+    bottom: 100%;
+    left: 0;
+    content: "";
+  }
+
+  @media (max-width: $mobile) {
+    top: calc(100% + 30px);
+    left: 50%;
+    width: 100%;
+    transform: translateX(-50%) translateY(-15px);
+  }
+}
+
+.pointer {
+  position: absolute;
+  z-index: 100;
+  top: -17px;
+  line-height: normal;
+  transition: left 0.3s;
+
+  @media (max-width: $mobile) {
+    left: calc(50% - 26.5px);
+  }
+
+  &::before {
+    position: absolute;
+    right: 9px;
+    bottom: 4.7px;
+    left: 9px;
+    height: 1px;
+    background-color: var(--clean-white);
+    content: "";
+  }
+}
+
+.item {
+  width: max-content;
+  max-width: 100%;
+  margin-bottom: 15px;
+  color: var(--second-black);
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 30px;
+  text-align: left;
+
+  &:last-child { margin-bottom: 0; }
+
+  &:hover {
+    color: var(--second-black-hover);
+  }
+}
+
+.wrapper {
+  position: relative;
+  width: 100%;
+
+  &:hover {
+    & .list {
+      opacity: 1;
+      pointer-events: all;
+      transform: translateX(0) translateY(0);
+
+      @media (max-width: $mobile) {
+        transform: translateX(-50%) translateY(0);
+      }
+    }
+
+    & .chevron {
+      transform: rotate(180deg);
+    }
+  }
+}

@@ -1,0 +1,41 @@
+.switch {
+  position: relative;
+  display: grid;
+  width: fit-content;
+  padding: 2px;
+  background: var(--gray-background);
+  border-radius: 5px;
+  grid-gap: 2px;
+}
+
+.pointer {
+  position: absolute;
+  z-index: 0;
+  top: 2px;
+  height: calc(100% - 4px);
+  background: var(--clean-white);
+  border-radius: 5px;
+  transition: left 0.3s ease-in-out;
+}
+
+.item {
+  z-index: 1;
+  display: block;
+  padding: 10px;
+  border-radius: 5px;
+  color: var(--second-black);
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20px;
+  place-self: stretch stretch;
+  text-align: center;
+
+  &:hover {
+    color: var(--second-black-hover);
+  }
+
+  &.active {
+    color: var(--black);
+  }
+}

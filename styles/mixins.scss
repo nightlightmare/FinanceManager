@@ -1,0 +1,11 @@
+@import "styles/variables";
+
+@mixin container {
+  width: 1176px;
+  margin: 0 auto;
+
+  @media (max-width: 1244px) {
+    width: 100%;
+    padding: 0 25px;
+  }
+}

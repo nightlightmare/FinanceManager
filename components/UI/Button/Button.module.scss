@@ -1,0 +1,28 @@
+@import "styles/variables";
+
+.button {
+  padding: 5px 15px;
+  background: var(--corporate-red);
+  border-radius: 5px;
+  color: var(--clean-white);
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 30px;
+
+  &:hover {
+    background: var(--corporate-red-hover);
+  }
+
+  &:active {
+    background: var(--corporate-red-active);
+  }
+
+  &.type {
+    &_no-bg {
+      padding: 5px 0;
+      background: $tr;
+      color: var(--black);
+    }
+  }
+}

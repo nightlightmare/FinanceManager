@@ -1,0 +1,155 @@
+@import "styles/mixins";
+@import "styles/variables";
+
+.wrapper {
+  padding: 25px 0;
+  border-bottom: 1px solid #ccc;
+  vertical-align: middle;
+
+  @media (max-width: $mobile) {
+    padding: 46px 0 17px;
+  }
+}
+
+.container {
+  @include container;
+}
+
+.top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  @media (max-width: $mobile) {
+    flex-wrap: wrap;
+    align-items: center;
+  }
+}
+
+.sections {
+  margin-left: 10px;
+  color: blue;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 30px;
+
+  @media (max-width: $mobile) {
+    display: flex;
+    width: 100%;
+    order: 4;
+    margin-top: 11px;
+    margin-left: 0;
+  }
+}
+
+.section {
+  position: relative;
+  display: inline-flex;
+  margin-left: 25px;
+  color: var(--black);
+
+  @media (max-width: $mobile) {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    order: 4;
+    margin-left: 0;
+    text-align: center;
+  }
+
+  &:first-child {
+    @media (max-width: $mobile) {
+      margin-right: 10px;
+    }
+  }
+
+  &:last-child {
+    @media (max-width: $mobile) {
+      margin-left: 10px;
+    }
+  }
+
+  &.active {
+    &::after {
+      position: absolute;
+      right: 0;
+      bottom: -5px;
+      left: 0;
+      border-bottom: 2px solid var(--corporate-red);
+      content: "";
+    }
+  }
+}
+
+.spacer {
+  flex: 1 0 auto;
+}
+
+.actions {
+  position: relative;
+  top: -7px;
+  display: flex;
+  align-items: center;
+}
+
+.action {
+  display: flex;
+  align-items: center;
+  margin-right: 25px;
+
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
+.account {
+  margin-right: 0;
+  color: var(--second-black);
+
+  &:hover {
+    color: var(--second-black-hover);
+  }
+}
+
+.bottom {
+  display: flex;
+  margin-top: 10px;
+
+  @media (max-width: $mobile) {
+    flex-direction: column;
+    margin-top: 17px;
+  }
+}
+
+.business-switcher {
+  padding-right: 25px;
+  border-right: 1px solid var(--gray-frame);
+  margin-right: 25px;
+
+  @media (max-width: $mobile) {
+    display: flex;
+    padding-right: 0;
+    padding-bottom: 12px;
+    border: none;
+    border-bottom: 1px solid var(--gray-frame);
+    margin-right: 0;
+    margin-bottom: 12px;
+  }
+}
+
+.mobile {
+  display: none;
+
+  @media (max-width: $mobile) {
+    display: flex;
+  }
+}
+
+.desktop {
+  display: flex;
+
+  @media (max-width: $mobile) {
+    display: none;
+  }
+}

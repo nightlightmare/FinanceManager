@@ -1,0 +1,64 @@
+:root {
+  --corporate-red: #da251d;
+  --corporate-red-hover: #de3b34;
+  --corporate-red-active: #c4211a;
+  --black: #333;
+  --second-black: #4f4f4f;
+  --second-black-hover: #333;
+  --clean-white: #fff;
+  --gray-frame: #bdbdbd;
+  --gray-background: #f2f0f0;
+}
+
+html {
+  background: var(--clean-white);
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family:
+    "Noto Sans Armenian",
+    "Noto Sans Display"
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    "Fira Sans",
+    "Droid Sans",
+    "Helvetica Neue",
+    sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+h2 {
+  margin-bottom: 30px;
+  color: var(--black);
+  font-size: 30px;
+  font-weight: 600;
+  line-height: 35px;
+}
+
+table,
+td,
+th {
+  padding: 0;
+  border-spacing: 0;
+}
+
+* {
+  box-sizing: border-box;
+  font-family:
+    "Noto Sans Armenian",
+    "Noto Sans Display",
+    sans-serif;
+  letter-spacing: -0.2px;
+}
