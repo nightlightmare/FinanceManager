@@ -2,7 +2,6 @@ import React, {
   FocusEventHandler,
   MouseEventHandler,
   useCallback,
-  useEffect,
   useMemo,
   useRef,
   useState,
