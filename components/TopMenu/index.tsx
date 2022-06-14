@@ -12,7 +12,6 @@ import MenuAccount from 'media/svg/menu_account.svg';
 
 import Button from 'components/UI/Button';
 import LanguageSwitcher from 'components/LaguageSwitcher';
-import BusinessTypeSwitcher from 'components/BusinessTypeSwitcher';
 import LinksRow from 'components/LinksRow';
 
 import { dictionary } from './dictionary';
@@ -28,7 +27,6 @@ const TopMenu: React.FC<TopMenuProps> = ({ localization = dictionary }) => {
   const { t } = getLocalization(localization, locale);
 
   const [isMobile, setIsMobile] = useState(false);
-  const [businessType, setBusinessType] = useState<'small' | 'big'>('small');
 
   const isBusiness = useMemo(() => route.includes('business'), [route]);
 
@@ -53,84 +51,42 @@ const TopMenu: React.FC<TopMenuProps> = ({ localization = dictionary }) => {
   const getBottomRow = useMemo(() => {
     if (isBusiness) {
       return (
-        <>
-          <div className={styles['business-switcher']}>
-            <BusinessTypeSwitcher onChange={setBusinessType} isMobile={isMobile} />
-          </div>
-          <div className={styles.scroll}>
-            {businessType === 'small'
-              ? (
-                <LinksRow
-                  links={[
-                    { title: t('Accounts'), path: '/business/accounts' },
-                    {
-                      title: t('Loans'),
-                      list: [
-                        { title: t('Lending'), path: '/business/distance-banking' },
-                        { title: t('Overdrafts'), path: '/business/distance-banking' },
-                      ],
-                    },
-                    { title: t('Cards'), path: '/business/cards' },
-                    {
-                      title: t('Trade Finance'),
-                      list: [
-                        { title: t('Bank guarantee'), path: '/business/distance-banking' },
-                      ],
-                    },
-                    {
-                      title: t('Other'),
-                      list: [
-                        { title: t('Distance Banking'), path: '/business/distance-banking' },
-                        { title: t('Individual safe boxes'), path: '/business/safe-boxes' },
-                        { title: t('Payroll projects'), path: '/business/accumulative-pension-system' },
-                        { title: t('Operations with securities'), path: '/business/insurance' },
-                        { title: t('Commercial acquiring'), path: '/business/special-offers' },
-                        { title: t('Insurance'), path: '/business/utility' },
-                      ],
-                    },
-                  ]}
-                  isMobile={isMobile}
-                />
-              )
-              : (
-                <LinksRow
-                  links={[
-                    { title: t('Accounts'), path: '/business/accounts' },
-                    {
-                      title: t('Loans'),
-                      list: [
-                        { title: t('Lending'), path: '/business/distance-banking' },
-                        { title: t('Overdrafts'), path: '/business/distance-banking' },
-                        { title: t('Leasing'), path: '/business/distance-banking' },
-                      ],
-                    },
-                    { title: t('Cards'), path: '/business/cards' },
-                    {
-                      title: t('Trade Finance'),
-                      list: [
-                        { title: t('Bank guarantee'), path: '/business/distance-banking' },
-                        { title: t('Collection'), path: '/business/distance-banking' },
-                        { title: t('Documentary letter of credit'), path: '/business/distance-banking' },
-                        { title: t('Factoring'), path: '/business/distance-banking' },
-                      ],
-                    },
-                    {
-                      title: t('Other'),
-                      list: [
-                        { title: t('Distance Banking'), path: '/business/distance-banking' },
-                        { title: t('Individual safe boxes'), path: '/business/safe-boxes' },
-                        { title: t('Payroll projects'), path: '/business/accumulative-pension-system' },
-                        { title: t('Operations with securities'), path: '/business/insurance' },
-                        { title: t('Commercial acquiring'), path: '/business/special-offers' },
-                        { title: t('Insurance'), path: '/business/utility' },
-                      ],
-                    },
-                  ]}
-                  isMobile={isMobile}
-                />
-              )}
-          </div>
-        </>
+        <div className={styles.scroll}>
+          <LinksRow
+            links={[
+              { title: t('Accounts'), path: '/business/accounts' },
+              {
+                title: t('Loans'),
+                list: [
+                  { title: t('Lending'), path: '/business/distance-banking' },
+                  { title: t('Overdrafts'), path: '/business/distance-banking' },
+                ],
+              },
+              { title: t('Cards'), path: '/business/cards' },
+              {
+                title: t('Trade Finance'),
+                list: [
+                  { title: t('Bank guarantee'), path: '/business/distance-banking' },
+                  { title: t('Collection'), path: '/business/distance-banking' },
+                  { title: t('Documentary letter of credit'), path: '/business/distance-banking' },
+                  { title: t('Factoring'), path: '/business/distance-banking' },
+                ],
+              },
+              {
+                title: t('Other'),
+                list: [
+                  { title: t('Distance Banking'), path: '/business/distance-banking' },
+                  { title: t('Individual safe boxes'), path: '/business/safe-boxes' },
+                  { title: t('Payroll projects'), path: '/business/accumulative-pension-system' },
+                  { title: t('Operations with securities'), path: '/business/insurance' },
+                  { title: t('Commercial acquiring'), path: '/business/special-offers' },
+                  { title: t('Insurance'), path: '/business/utility' },
+                ],
+              },
+            ]}
+            isMobile={isMobile}
+          />
+        </div>
       );
     }
 
@@ -163,7 +119,6 @@ const TopMenu: React.FC<TopMenuProps> = ({ localization = dictionary }) => {
     isBusiness,
     t,
     isMobile,
-    businessType,
   ]);
 
   const getWidth = () => window.innerWidth
@@ -173,9 +128,7 @@ const TopMenu: React.FC<TopMenuProps> = ({ localization = dictionary }) => {
   useEffect(() => {
     let timeoutId: undefined | NodeJS.Timeout;
     const handleResize = () => {
-      // prevent execution of previous setTimeout
       clearTimeout(timeoutId);
-      // change width from the state object after 150 milliseconds
       timeoutId = setTimeout(() => setIsMobile(getWidth() <= 884), 150);
     };
 

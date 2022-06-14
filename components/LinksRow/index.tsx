@@ -1,4 +1,5 @@
 import React, {
+  FocusEventHandler,
   MouseEventHandler,
   useCallback,
   useEffect,
@@ -8,6 +9,7 @@ import React, {
 } from 'react';
 import cn from 'classnames';
 import Link from 'next/link';
+import Portal from 'HOC/Portal';
 
 import DropdownPointer from 'media/svg/dropdown_pointer.svg';
 
@@ -32,44 +34,40 @@ const LinksRow: React.FC<LinksRowProps> = ({
   links,
   isMobile,
 }) => {
-  const [dropdownListLeft, setDropdownListLeft] = useState<string | undefined>(undefined);
-  const [dropdownListTop, setDropdownListTop] = useState<string | undefined>(undefined);
+  const [hoverKey, setHoverKey] = useState('');
 
   const listRef = useRef<null | HTMLUListElement>(null);
 
   const scrollToItem: MouseEventHandler<HTMLElement> = useCallback((e) => {
     if (isMobile && listRef.current) {
       const target = e.target as HTMLElement;
-      const { left, width, top } = target.getBoundingClientRect();
+      const { left, width } = target.getBoundingClientRect();
       const center = listRef.current.clientWidth / 2;
-
-      // выпадающее меню
-      setDropdownListTop(`${top + 47}px`);
-
-      if ((left + 270) > (listRef.current.clientWidth - 25)) {
-        setDropdownListLeft(`${listRef.current.clientWidth - 295}px`);
-      } else if (left < 25) {
-        setDropdownListLeft('25px');
-      } else {
-        setDropdownListLeft(`${left}px`);
-      }
 
       // скролл списка
       listRef.current?.scrollTo({
         left: listRef.current.scrollLeft + left - center + width / 2,
       });
-    } else {
-      setDropdownListLeft(undefined);
-      setDropdownListTop(undefined);
     }
   }, [isMobile, listRef]);
 
-  useEffect(() => {
-    if (!isMobile) {
-      setDropdownListLeft(undefined);
-      setDropdownListTop(undefined);
-    }
-  }, [isMobile]);
+  const onEnterHandler:MouseEventHandler<HTMLLIElement> = (event) => {
+    const target = event.currentTarget as HTMLElement;
+    setHoverKey(String(target.getAttribute('data-value')));
+  };
+
+  const onFocusHandler:FocusEventHandler<HTMLLIElement> = (event) => {
+    const target = event.currentTarget as HTMLElement;
+    setHoverKey(String(target.getAttribute('data-value')));
+  };
+
+  const onLeaveHandler:MouseEventHandler<HTMLLIElement> = () => {
+    setHoverKey('');
+  };
+
+  const onBlurHandler:FocusEventHandler<HTMLLIElement> = () => {
+    setHoverKey('');
+  };
 
   const mainItems = useMemo(() => links.map((link) => {
     if ('path' in link) {
@@ -90,27 +88,32 @@ const LinksRow: React.FC<LinksRowProps> = ({
         key={link.title}
         role="menuitem"
         onClick={scrollToItem}
+        onFocus={onFocusHandler}
+        onMouseEnter={onEnterHandler}
+        onBlur={onBlurHandler}
+        onMouseLeave={onLeaveHandler}
+        data-value={link.title}
       >
-        <div className={styles.dropdownTitle}>{link.title}</div>
-        <div
-          className={styles.dropdownList}
-          style={{
-            left: dropdownListLeft,
-            top: dropdownListTop,
-          }}
-        >
-          <div className={styles.pointer}>
-            <DropdownPointer />
-          </div>
-          {link.list.map((nested) => (
-            <div className={styles.dropdownItem} key={nested.title}>
-              <Link href={nested.path}>{nested.title}</Link>
-            </div>
-          ))}
+        <div className={styles.pointer}>
+          <DropdownPointer />
         </div>
+        <div className={styles.dropdownTitle}>{link.title}</div>
+        <Portal>
+          <div
+            className={cn(styles.dropdownList, { [styles.hover]: hoverKey === link.title })}
+          >
+            <div className={styles.container}>
+              {link.list.map((nested) => (
+                <div className={styles.dropdownItem} key={nested.title}>
+                  <Link href={nested.path}>{nested.title}</Link>
+                </div>
+              ))}
+            </div>
+          </div>
+        </Portal>
       </li>
     );
-  }), [dropdownListLeft, dropdownListTop, links, scrollToItem]);
+  }), [hoverKey, links, scrollToItem]);
 
   return (
     <nav className={styles.wrapper} role="navigation">

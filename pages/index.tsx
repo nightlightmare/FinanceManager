@@ -94,6 +94,55 @@ const HomePage: NextPage<HomePageProps> = ({ localization, rates }) => {
             </p>
           </a>
 
+          <a href="https://nextjs.org/learn" className="card">
+            <h2>
+              {t('About')}
+              {' '}
+              &rarr;
+            </h2>
+            <p>Learn about Next.js in an interactive course with quizzes!</p>
+          </a>
+
+          <a
+            href="https://github.com/vercel/next.js/tree/canary/examples"
+            className="card"
+          >
+            <h2>
+              {t('Users List')}
+              {' '}
+              &rarr;
+            </h2>
+            <p>Discover and deploy boilerplate example Next.js projects.</p>
+          </a>
+
+          <a
+            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
+            className="card"
+          >
+            <h2>
+              {t('Users API')}
+              {' '}
+              &rarr;
+            </h2>
+            <p>
+              Instantly deploy your Next.js site to a public URL with Vercel.
+            </p>
+          </a>
+
+          <a
+            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
+            className="card"
+          >
+            <h2>
+              {t('Language')}
+              {' '}
+              &rarr;
+            </h2>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit unde dignissimos tempore fuga? Id, cumque.
+            </p>
+          </a>
+
           <a
             href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
             className="card"

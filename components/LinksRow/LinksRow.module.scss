@@ -1,3 +1,4 @@
+@import "styles/mixins";
 @import "styles/variables";
 
 .wrapper {
@@ -9,7 +10,7 @@
 
     &::before {
       position: absolute;
-      z-index: 1;
+      z-index: 2;
       top: 0;
       bottom: 0;
       left: 0;
@@ -20,7 +21,7 @@
 
     &::after {
       position: absolute;
-      z-index: 1;
+      z-index: 2;
       top: 0;
       right: 0;
       bottom: 0;
@@ -79,54 +80,38 @@
 .dropdownList {
   position: absolute;
   z-index: $z-overlay;
-  top: calc(100% + 25px);
-  left: 50%;
-  max-width: 295px;
-  padding: 25px;
-  border: 1px solid var(--gray-frame);
+  top: 131px;
+  right: 0;
+  left: 0;
+  padding: 25px 0;
+  border-bottom: 1px solid var(--gray-frame);
   background: var(--clean-white);
-  border-radius: 10px;
   opacity: 0;
   pointer-events: none;
-  transform: translateX(-50%) translateY(-15px);
   transition: transform 0.3s, opacity 0.3s;
 
   @media (max-width: $mobile) {
-    position: fixed;
-    top: auto;
-    right: auto;
-    bottom: auto;
-    left: auto;
-    display: none;
-    width: 270px;
-    max-width: 270px;
-    transform: translateX(0) translateY(0);
+    top: 190px;
   }
 
-  &::before {
-    position: absolute;
-    top: -30px;
-    right: 0;
-    bottom: 100%;
-    left: 0;
-    content: "";
-
-    @media (max-width: $mobile) {
-      display: none;
-    }
+  &.hover,
+  &:hover {
+    opacity: 1;
+    pointer-events: all;
   }
+}
+
+.container {
+  @include container;
 }
 
 .pointer {
   position: absolute;
-  z-index: 100;
-  top: -17px;
+  z-index: 0;
+  top: calc(100% + 9px);
   left: calc(50% - 26.5px);
+  display: none;
   line-height: normal;
-
-  @media (max-width: $mobile) {
-    display: none;
-  }
 
   &::before {
     position: absolute;
@@ -163,45 +148,38 @@
       transform: rotate(180deg);
     }
   }
-
-  &:last-child {
-    & .dropdownList {
-      right: -25px;
-      left: auto;
-      transform: translateX(0%) translateY(0);
-
-      @media (max-width: $mobile) {
-        right: auto;
-        transform: translateX(0) translateY(0);
-      }
-
-      & .pointer {
-        right: 15px;
-        left: auto;
-      }
-    }
-  }
 }
 
 .dropdownTitle {
+  position: relative;
+  z-index: 1;
   display: flex;
   cursor: pointer;
+
+  &::after {
+    position: absolute;
+    top: 100%;
+    right: -25px;
+    left: -25px;
+    height: 26px;
+    content: "";
+  }
 }
 
 .dropdownItem {
   width: max-content;
   max-width: 100%;
   margin-bottom: 15px;
-  color: var(--second-black);
+  color: var(--black);
   cursor: pointer;
-  font-size: 16px;
+  font-size: 20px;
   font-weight: 400;
-  line-height: 30px;
+  line-height: 35px;
   text-align: left;
 
   &:last-child { margin-bottom: 0; }
 
   &:hover {
-    color: var(--second-black-hover);
+    color: var(--corporate-red);
   }
 }
