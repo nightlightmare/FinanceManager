@@ -1,7 +1,13 @@
 import {
-  RefObject, useCallback, useEffect, useState,
+  RefObject,
+  useCallback,
+  useEffect,
+  useState,
 } from 'react';
 
+/**
+ * Хук, отслеживающий клик по объекту и возвращающий состояние (открыт/закрыт)
+ */
 const useDropdown = (dropdownRef: RefObject<HTMLElement>) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 

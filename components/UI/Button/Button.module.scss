@@ -1,14 +1,17 @@
 @import "styles/variables";
 
 .button {
+  display: inline-flex;
   padding: 5px 15px;
+  border: none;
   background: var(--corporate-red);
-  border-radius: 5px;
+  border-radius: 10px;
   color: var(--clean-white);
   cursor: pointer;
-  font-size: 16px;
+  font-size: 1rem;
   font-weight: 400;
-  line-height: 30px;
+  line-height: 1.875rem;
+  transition: background 0.3s;
 
   &:hover {
     background: var(--corporate-red-hover);
@@ -18,11 +21,24 @@
     background: var(--corporate-red-active);
   }
 
+  &:disabled {
+    background: var(--grey-frame);
+  }
+
   &.type {
     &_no-bg {
       padding: 5px 0;
       background: $tr;
       color: var(--black);
+    }
+  }
+
+  &.size {
+    &_large {
+      padding: 15px 30px;
+      font-size: 1.25rem;
+      font-weight: 400;
+      line-height: 1.875rem;
     }
   }
 }

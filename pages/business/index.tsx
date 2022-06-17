@@ -13,7 +13,7 @@ interface BusinessPageProps {
 }
 
 const BusinessPage: NextPage<BusinessPageProps> = ({ localization }) => {
-  // локализация
+  // Пример, как использовать локализацию на странице
   const { locale } = useRouter();
   const { t } = getLocalization(localization, locale);
 

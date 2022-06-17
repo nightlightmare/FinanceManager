@@ -20,35 +20,20 @@
 
 .list {
   position: absolute;
-  top: calc(100% + 23px);
+  top: calc(100% + 15px);
   left: 50%;
-  display: none;
   padding: 25px;
   border: 1px solid var(--gray-frame);
   background: var(--clean-white);
   border-radius: 10px;
+  opacity: 0;
+  pointer-events: none;
   transform: translateX(-50%);
+  transition: opacity 0.3s;
 
   &.open {
-    display: block;
-  }
-}
-
-.pointer {
-  position: absolute;
-  z-index: 100;
-  top: -17px;
-  left: 15px;
-  line-height: normal;
-
-  &::before {
-    position: absolute;
-    right: 9px;
-    bottom: 4.7px;
-    left: 9px;
-    height: 1px;
-    background-color: var(--clean-white);
-    content: "";
+    opacity: 1;
+    pointer-events: all;
   }
 }
 
@@ -56,9 +41,9 @@
   margin-bottom: 15px;
   color: var(--second-black);
   cursor: pointer;
-  font-size: 16px;
+  font-size: 1rem;
   font-weight: 400;
-  line-height: 30px;
+  line-height: 1.875rem;
   text-align: center;
 
   &:last-child { margin-bottom: 0; }

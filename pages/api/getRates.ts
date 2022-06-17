@@ -4,9 +4,13 @@ import axios from 'axios';
 import { parseStringPromise } from 'xml2js';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
+// Пути для получения безналичных и наличных курсов
 const NON_CASH_RATES_PATH = 'http://ibank1.armbusinessbank.local/appbank1.0/Default.aspx?action=rates(0)';
 const CASH_RATES_PATH = 'http://ibank1.armbusinessbank.local/appbank1.0/Default.aspx?action=rates(1)';
 
+/**
+ * Получает курсы валют (если они устарели), сохраняет их в файл rates.json и возвращает их клиенту
+ */
 export default async function handler(_req: NextApiRequest, res: NextApiResponse) {
   try {
     const currentDate = new Date();

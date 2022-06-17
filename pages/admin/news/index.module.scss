@@ -1,0 +1,65 @@
+@import "styles/mixins";
+
+.container {
+  @include container;
+
+  table {
+    width: 100%;
+    padding-top: 25px;
+
+    tr {
+      th,
+      td {
+        padding: 10px;
+        border-bottom: 1px solid var(--gray-frame);
+        text-align: left;
+
+        &:last-child {
+          text-align: center;
+        }
+      }
+    }
+  }
+}
+
+.modal-title {
+  padding: 0;
+  margin: 0;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  & > * {
+    margin-right: 15px;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}
+
+.form {
+  width: 100%;
+}
+
+.row {
+  margin-bottom: 15px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.param {
+  input { width: 100%; }
+
+  textarea {
+    display: flex;
+    width: 100%;
+    height: 400px;
+    resize: none;
+  }
+}

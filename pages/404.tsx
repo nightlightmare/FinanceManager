@@ -11,7 +11,7 @@ const Page404: NextPage = () => (
     </Head>
 
     <div className="main">
-      <h1>Error 404</h1>
+      <h2>Error 404</h2>
     </div>
   </div>
 );

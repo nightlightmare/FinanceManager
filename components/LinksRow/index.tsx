@@ -37,6 +37,7 @@ const LinksRow: React.FC<LinksRowProps> = ({
 
   const listRef = useRef<null | HTMLUListElement>(null);
 
+  // Коллбек при клике на пункт меню вызывает прокрутку списка к состоянию, когда выбранный пункт находится в середине
   const scrollToItem: MouseEventHandler<HTMLElement> = useCallback((e) => {
     if (isMobile && listRef.current) {
       const target = e.target as HTMLElement;
@@ -68,8 +69,10 @@ const LinksRow: React.FC<LinksRowProps> = ({
     setHoverKey('');
   };
 
+  // Создаем список
   const mainItems = useMemo(() => links.map((link) => {
     if ('path' in link) {
+      // Пункт без вложенного списка
       return (
         <li
           className={styles.item}
@@ -81,6 +84,7 @@ const LinksRow: React.FC<LinksRowProps> = ({
       );
     }
 
+    // пункт с вложенным списком
     return (
       <li
         className={cn(styles.dropdown, styles.item)}

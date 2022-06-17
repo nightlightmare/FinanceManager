@@ -5,7 +5,6 @@ import { useRouter } from 'next/router';
 import useDropdown from 'hooks/useDropdown';
 
 import MenuLanguage from 'media/svg/menu_language.svg';
-import DropdownPointer from 'media/svg/dropdown_pointer.svg';
 
 import styles from './LaguageSwitcher.module.scss';
 
@@ -30,9 +29,6 @@ const LanguageSwitcher = () => {
         <MenuLanguage />
       </div>
       <div className={listClasses}>
-        <div className={styles.pointer}>
-          <DropdownPointer />
-        </div>
         <div className={styles.item}>
           <Link href={route} locale="am">AM</Link>
         </div>

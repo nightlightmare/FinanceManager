@@ -1,116 +1,85 @@
+@import "styles/mixins";
 @import "styles/variables";
 
 .wrapper {
-  width: calc((100% - 25px) / 2);
-  flex: none;
+  margin-bottom: 60px;
+  background-color: var(--clean-white);
+}
 
-  @media (max-width: $mobile) {
-    width: 100%;
-  }
+.container {
+  @include container;
+}
+
+.content {
+  padding: 30px 30px 0;
 }
 
 .title {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: flex-start;
+  margin: 0 0 24px;
+  color: var(--black);
+  font-size: 1.625rem;
+  line-height: 1.95rem;
+}
 
-  @media (max-width: $mobile) {
-    justify-content: center;
-  }
+.actions {
+  font-size: 1.0625rem;
+  line-height: 1.0625rem;
 
-  & .col {
-    display: flex;
-    min-width: calc((100% - 10px) / 2);
-    flex: none;
+  a {
+    color: var(--second-black);
 
-    &:first-child {
-      margin-right: 10px;
-
-      @media (max-width: $mobile) {
-        margin-right: 0;
-      }
-    }
-
-    @media (max-width: $mobile) {
-      width: 100%;
-      justify-content: center;
+    &:hover {
+      color: var(--corporate-red);
     }
   }
 }
 
-.table {
-  padding-top: 20px;
+.rates {
+  display: grid;
+  margin-bottom: 36px;
+  font-variant: tabular-nums;
+  grid-template-columns: repeat(5, auto);
 
-  @media (max-width: $mobile) {
-    max-width: 400px;
-    margin: 0 auto;
-  }
-}
-
-.header {
-  padding-bottom: 22px;
-  color: var(--second-black);
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 20px;
-  text-align: left;
-}
-
-.data {
-  width: auto;
-  padding-right: 50px;
-  padding-bottom: 10px;
-  color: var(--second-black);
-  font-size: 20px;
-  font-weight: 400;
-  line-height: 20px;
-  text-align: right;
-  vertical-align: middle;
-
-  @media (max-width: $mobile) {
-    padding-right: 25px;
-    padding-bottom: 25px;
+  div {
+    padding-top: 9px;
+    padding-bottom: 0;
+    padding-left: 16px;
+    border-left: 1px solid rgb(0 0 0 / 10%);
   }
 
-  &:last-child {
-    padding-right: 0;
-  }
+  p {
+    padding: 6px 0 6px 16px;
+    margin: 0;
 
-  &:nth-child(1) {
-    width: calc(#{$container-width} / 4);
-    padding-right: 0;
-    text-align: left;
+    &:not(.th) {
+      border-top: 1px solid rgb(0 0 0 / 7%);
+    }
 
-    @media (max-width: $mobile) {
-      width: 100%;
-      padding-right: 10px;
+    &.currency {
+      padding-left: 0;
+    }
+
+    &.th {
+      padding-top: 12px;
+      padding-bottom: 16px;
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    &.buy {
+      border-left: 1px solid rgb(0 0 0 / 10%);
     }
   }
-}
 
-.currency {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  font-weight: 400;
-}
-
-.flag {
-  margin-right: 15px;
-
-  @media (max-width: $mobile) {
-    display: none;
+  .cash {
+    grid-column: 2;
   }
-}
 
-.value,
-.arrow {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-}
+  .transfer {
+    grid-column: 4;
+  }
 
-.arrow {
-  margin-left: 5px;
+  .currency {
+    grid-column: 1;
+  }
 }

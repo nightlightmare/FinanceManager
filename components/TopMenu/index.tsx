@@ -14,6 +14,8 @@ import Button from 'components/UI/Button';
 import LanguageSwitcher from 'components/LaguageSwitcher';
 import LinksRow from 'components/LinksRow';
 
+// Словарь с переводами для отдельных компонентов делать лучше отдельно
+// Для страниц - в папке localization, сохраняя структуру файлов/папок
 import { dictionary } from './dictionary';
 
 import styles from './TopMenu.module.scss';
@@ -28,6 +30,7 @@ const TopMenu: React.FC<TopMenuProps> = ({ localization = dictionary }) => {
 
   const [isMobile, setIsMobile] = useState(false);
 
+  // Определяем, выбран раздел для бизнеса или для частных лиц
   const isBusiness = useMemo(() => route.includes('business'), [route]);
 
   const individualsClasses = useMemo(
@@ -40,6 +43,7 @@ const TopMenu: React.FC<TopMenuProps> = ({ localization = dictionary }) => {
     [isBusiness],
   );
 
+  // Меняем лого в шапке в зависимости от выбранного языка
   const logoIcon = useMemo(() => {
     if (locale === 'en') return <LogoEn />;
 
@@ -48,6 +52,7 @@ const TopMenu: React.FC<TopMenuProps> = ({ localization = dictionary }) => {
     return <LogoAm />;
   }, [locale]);
 
+  // Структура для ссылок в нижней строке шапки
   const getBottomRow = useMemo(() => {
     if (isBusiness) {
       return (
@@ -125,6 +130,7 @@ const TopMenu: React.FC<TopMenuProps> = ({ localization = dictionary }) => {
   || document.documentElement.clientWidth
   || document.body.clientWidth;
 
+  // Определяем, нужно ли включать "мобильное" отображение, проверяя, ширина экрана меньше 884px или нет (значение получено эмпирически и может изменяться)
   useEffect(() => {
     let timeoutId: undefined | NodeJS.Timeout;
     const handleResize = () => {

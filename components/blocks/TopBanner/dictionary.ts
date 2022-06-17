@@ -1,12 +1,12 @@
 // eslint-disable-next-line import/prefer-default-export
 export const dictionary = {
   am: {
-    Transfers: 'Переводы',
+    Sell: 'Վաճառք',
   },
   en: {
-    Transfers: 'Переводы',
+    Sell: 'Sell',
   },
   ru: {
-    Transfers: 'Переводы',
+    Sell: 'Продажа',
   },
 };

@@ -1,9 +1,139 @@
 @import "styles/mixins";
+@import "styles/variables";
 
 .wrapper {
-  padding: 55px 0;
+  padding: 50px 0 60px;
+  border-top: 1px solid var(--gray-frame);
+  margin-top: 100px;
 }
 
 .container {
   @include container;
+}
+
+.top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 40px;
+}
+
+.phone {
+  margin-left: -15px;
+}
+
+.app {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-right: -15px;
+  color: var(--second-black);
+  font-size: 1rem;
+  line-height: 1.5625rem;
+
+  svg {
+    width: 30px;
+    height: 30px;
+    margin-right: 15px;
+  }
+}
+
+.phone,
+.app {
+  padding: 10px 15px;
+  background: $tr;
+  border-radius: 9px;
+  cursor: pointer;
+  transition: background 0.3s;
+
+  &:hover {
+    background: var(--gray-background);
+  }
+}
+
+.phone-number {
+  color: var(--black);
+  font-size: 1.1875rem;
+  font-weight: 700;
+  line-height: 1.875rem;
+
+  @include title-font;
+}
+
+.working-hours {
+  color: var(--second-black);
+  font-size: 0.875rem;
+  line-height: 1.5625rem;
+}
+
+.links {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 50px;
+  column-gap: 30px;
+  font-size: 0.875rem;
+}
+
+.group {
+  width: calc(25% - 26px);
+}
+
+.title {
+  margin: 0 0 15px;
+}
+
+.list {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.list-item {
+  margin-bottom: 10px;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+
+  a {
+    color: var(--second-black);
+    cursor: pointer;
+
+    &:hover {
+      color: var(--corporate-red);
+    }
+  }
+}
+
+.bottom {
+  display: flex;
+  justify-content: space-between;
+}
+
+.license {
+  color: var(--second-black);
+  font-size: 0.75rem;
+  line-height: 1.25rem;
+}
+
+.social {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.icon {
+  margin-left: 20px;
+  color: var(--second-black);
+  cursor: pointer;
+  transition: color 0.3s;
+
+  &:hover {
+    color: var(--black);
+  }
+
+  &:first-child {
+    margin-left: 0;
+  }
 }

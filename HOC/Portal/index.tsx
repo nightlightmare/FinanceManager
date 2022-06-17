@@ -5,6 +5,7 @@ interface PortalProps {
   children: ReactNode
 }
 
+// HOC для использования порталов
 const Portal:React.FC<PortalProps> = ({ children }) => {
   const [mounted, setMounted] = useState(false);
 
@@ -14,6 +15,7 @@ const Portal:React.FC<PortalProps> = ({ children }) => {
     return () => setMounted(false);
   }, []);
 
+  // если страница отрендерилась - можно создавать порталы
   return mounted
     ? createPortal(
       children,

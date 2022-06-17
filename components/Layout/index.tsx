@@ -8,6 +8,7 @@ interface LayoutProps {
   children: ReactNode;
 }
 
+// тут находится структура страниц для основных разделов сайта
 const Layout: React.FC<LayoutProps> = ({ children }) => (
   <div className={styles.wrapper}>
     <header>

@@ -16,6 +16,7 @@ interface SwitchProps {
 const Switch: React.FC<SwitchProps> = ({ items, onChange }) => {
   const [active, setActive] = useState(0);
 
+  // при клике делаем переключаем состояние
   const onClickHandler: MouseEventHandler<HTMLElement> = (event) => {
     const target = event.target as HTMLElement;
     setActive(Number(target.getAttribute('data-index')));

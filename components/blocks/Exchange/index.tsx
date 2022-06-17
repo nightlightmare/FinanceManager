@@ -1,17 +1,11 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import cn from 'classnames';
 import { useRouter } from 'next/router';
 import getLocalization from 'utils/getLocalization';
 import { Localization } from 'types/localization';
-import { RatesData, RatesTypes } from 'types/rates';
-import Switch from 'components/UI/Switch';
+import { RatesData } from 'types/rates';
 
-import UsdFlag from 'media/svg/usd_flag.svg';
-import EurFlag from 'media/svg/eur_flag.svg';
-import GbpFlag from 'media/svg/gbp_flag.svg';
-import RubFlag from 'media/svg/rub_flag.svg';
-import Stonks from 'media/svg/stonks.svg';
-import NotStonks from 'media/svg/notstonks.svg';
-
+import Link from 'next/link';
 import { dictionary } from './dictionary';
 
 import styles from './Exchange.module.scss';
@@ -25,182 +19,100 @@ const ExchangeBlock: React.FC<ExchangeBlockProps> = ({ localization = dictionary
   const { locale } = useRouter();
   const { t } = getLocalization(localization, locale);
 
-  const [rates, setRates] = useState<RatesTypes | undefined>(undefined);
+  const [rates, setRates] = useState<RatesData | undefined>(undefined);
 
-  const switchItems = [
-    { title: t('Cash'), value: 'cash_result' },
-    { title: t('Non-cash'), value: 'non_cash_result' },
-
-  ];
-
-  const onSwitchChange = useCallback((value: string) => {
-    // @ts-ignore
-    setRates(data[value]);
-  }, [data]);
-
-  useEffect(
-    () => { setRates(data.cash_result); },
-    [data],
-  );
-
-  const getStonks = (delta: number) => (delta > 0 ? <Stonks /> : <NotStonks />);
+  // данные получаем со страницы, чтобы не мешать гидрированию, отображаем котировки после рендеринга компонента
+  useEffect(() => { setRates(data); }, [data]);
 
   return (
     <div className={styles.wrapper}>
-      <div className={styles.title}>
-        <div className={styles.col}>
-          <h2>{t('Exchange rates')}</h2>
-        </div>
-        <div className={styles.col}>
-          <Switch
-            items={switchItems}
-            onChange={onSwitchChange}
-          />
-        </div>
-      </div>
-      <div className={styles.tableRow}>
-        <table className={styles.table}>
-          <thead>
-            <tr>
-              <th className={styles.header}>{t('Currency')}</th>
-              <th className={styles.header}>{t('Buy')}</th>
-              <th className={styles.header}>{t('Sell')}</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td className={styles.data}>
-                <div className={styles.currency}>
-                  <span className={styles.flag}>
-                    <UsdFlag />
-                  </span>
-                  <span>USD</span>
-                </div>
-              </td>
-              <td className={styles.data}>
-                <div className={styles.value}>
-                  <span>{rates && Number(rates.Rates[0].rate[0].$.value1).toFixed(2)}</span>
-                  <span className={styles.arrow}>
-                    {rates && getStonks(Number(rates.Rates[0].rate[0].$.delta1))}
-                  </span>
-                </div>
-              </td>
-              <td className={styles.data}>
-                <div className={styles.value}>
-                  <span>{rates && Number(rates.Rates[0].rate[0].$.value2).toFixed(2)}</span>
-                  <span className={styles.arrow}>
-                    {rates && getStonks(Number(rates.Rates[0].rate[0].$.delta2))}
-                  </span>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td className={styles.data}>
-                <div className={styles.currency}>
-                  <span className={styles.flag}>
-                    <EurFlag />
-                  </span>
-                  <span>EUR</span>
-                </div>
-              </td>
-              <td className={styles.data}>
-                <div className={styles.value}>
-                  <span>{rates && Number(rates.Rates[0].rate[1].$.value1).toFixed(2)}</span>
-                  <span className={styles.arrow}>
-                    {rates && getStonks(Number(rates.Rates[0].rate[1].$.delta1))}
-                  </span>
-                </div>
-              </td>
-              <td className={styles.data}>
-                <div className={styles.value}>
-                  <span>{rates && Number(rates.Rates[0].rate[1].$.value2).toFixed(2)}</span>
-                  <span className={styles.arrow}>
-                    {rates && getStonks(Number(rates.Rates[0].rate[1].$.delta2))}
-                  </span>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td className={styles.data}>
-                <div className={styles.currency}>
-                  <span className={styles.flag}>
-                    <RubFlag />
-                  </span>
-                  <span>RUB</span>
-                </div>
+      <div className={styles.container}>
+        <div className={styles.content}>
+          <h2 className={styles.title}>{t('Exchange rates')}</h2>
 
-              </td>
-              <td className={styles.data}>
-                <div className={styles.value}>
-                  <span>{rates && Number(rates.Rates[0].rate[2].$.value1).toFixed(2)}</span>
-                  <span className={styles.arrow}>
-                    {rates && getStonks(Number(rates.Rates[0].rate[2].$.delta1))}
-                  </span>
-                </div>
-              </td>
-              <td className={styles.data}>
-                <div className={styles.value}>
-                  <span>{rates && Number(rates.Rates[0].rate[2].$.value2).toFixed(2)}</span>
-                  <span className={styles.arrow}>
-                    {rates && getStonks(Number(rates.Rates[0].rate[2].$.delta2))}
-                  </span>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td className={styles.data}>
-                <div className={styles.currency}>
-                  <span className={styles.flag}>
-                    <GbpFlag />
-                  </span>
-                  <span>GBP</span>
-                </div>
-              </td>
-              <td className={styles.data}>
-                <div className={styles.value}>
-                  <span>{rates && Number(rates.Rates[0].rate[3].$.value1).toFixed(2)}</span>
-                  <span className={styles.arrow}>
-                    {rates && getStonks(Number(rates.Rates[0].rate[3].$.delta1))}
-                  </span>
-                </div>
-              </td>
-              <td className={styles.data}>
-                <div className={styles.value}>
-                  <span>{rates && Number(rates.Rates[0].rate[3].$.value2).toFixed(2)}</span>
-                  <span className={styles.arrow}>
-                    {rates && getStonks(Number(rates.Rates[0].rate[3].$.delta2))}
-                  </span>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td className={styles.data}>
-                <div className={styles.currency}>
-                  <span className={styles.flag}>
-                    <GbpFlag />
-                  </span>
-                  <span>CHF</span>
-                </div>
-              </td>
-              <td className={styles.data}>
-                <div className={styles.value}>
-                  <span>{rates && Number(rates.Rates[0].rate[4].$.value1).toFixed(2)}</span>
-                  <span className={styles.arrow}>
-                    {rates && getStonks(Number(rates.Rates[0].rate[4].$.delta1))}
-                  </span>
-                </div>
-              </td>
-              <td className={styles.data}>
-                <div className={styles.value}>
-                  <span>{rates && Number(rates.Rates[0].rate[4].$.value2).toFixed(2)}</span>
-                  <span className={styles.arrow}>
-                    {rates && getStonks(Number(rates.Rates[0].rate[4].$.delta2))}
-                  </span>
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+          <div className={styles.rates}>
+            <div className={styles.cash}>Безналичный расчет</div>
+            <div className={styles.transfer}>Наличный расчет</div>
+            <p className={cn(styles.th, styles.currency)}>Валюта</p>
+            <p className={cn(styles.th, styles.buy)}>Курс покупки</p>
+            <p className={styles.th}>Курс продажи</p>
+            <p className={cn(styles.th, styles.buy)}>Курс покупки</p>
+            <p className={styles.th}>Курс продажи</p>
+            <p className={cn(styles.currency, styles.odd)}>
+              <b>Российский рубль</b>
+              {' '}
+              (RUB)
+            </p>
+            <p className={cn(styles.buy, styles.odd)}>
+              {rates && Number(rates.non_cash_result.Rates[0].rate[2].$.value1).toFixed(4)}
+            </p>
+            <p className={styles.odd}>
+              {rates && Number(rates.non_cash_result.Rates[0].rate[2].$.value2).toFixed(4)}
+            </p>
+            <p className={cn(styles.buy, styles.odd)}>
+              {rates && Number(rates.cash_result.Rates[0].rate[2].$.value1).toFixed(4)}
+            </p>
+            <p className={styles.odd}>
+              {rates && Number(rates.cash_result.Rates[0].rate[2].$.value2).toFixed(4)}
+            </p>
+            <p className={styles.currency}>
+              <b>Доллар США</b>
+              {' '}
+              (USD)
+            </p>
+            <p className={styles.buy}>
+              {rates && Number(rates.non_cash_result.Rates[0].rate[0].$.value1).toFixed(4)}
+            </p>
+            <p>
+              {rates && Number(rates.non_cash_result.Rates[0].rate[0].$.value2).toFixed(4)}
+            </p>
+            <p className={styles.buy}>
+              {rates && Number(rates.cash_result.Rates[0].rate[0].$.value1).toFixed(4)}
+            </p>
+            <p>
+              {rates && Number(rates.cash_result.Rates[0].rate[0].$.value2).toFixed(4)}
+            </p>
+            <p className={cn(styles.currency, styles.odd)}>
+              <b>Евро</b>
+              {' '}
+              (EUR)
+            </p>
+            <p className={cn(styles.buy, styles.odd)}>
+              {rates && Number(rates.non_cash_result.Rates[0].rate[1].$.value1).toFixed(4)}
+            </p>
+            <p className={styles.odd}>
+              {rates && Number(rates.non_cash_result.Rates[0].rate[1].$.value2).toFixed(4)}
+            </p>
+            <p className={cn(styles.buy, styles.odd)}>
+              {rates && Number(rates.cash_result.Rates[0].rate[1].$.value1).toFixed(4)}
+            </p>
+            <p className={styles.odd}>
+              {rates && Number(rates.cash_result.Rates[0].rate[1].$.value2).toFixed(4)}
+            </p>
+            <p className={styles.currency}>
+              <b>Английский фунт стерлингов</b>
+              {' '}
+              (GBP)
+            </p>
+            <p className={styles.buy}>
+              {rates && Number(rates.non_cash_result.Rates[0].rate[3].$.value1).toFixed(4)}
+            </p>
+            <p>
+              {rates && Number(rates.non_cash_result.Rates[0].rate[3].$.value2).toFixed(4)}
+            </p>
+            <p className={styles.buy}>
+              {rates && Number(rates.cash_result.Rates[0].rate[3].$.value1).toFixed(4)}
+            </p>
+            <p>
+              {rates && Number(rates.cash_result.Rates[0].rate[3].$.value2).toFixed(4)}
+            </p>
+          </div>
+
+          <div className={styles.actions}>
+            <Link href="/">{t('Buying and selling currency')}</Link>
+          </div>
+
+        </div>
       </div>
     </div>
   );
