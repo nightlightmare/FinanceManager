@@ -5,10 +5,7 @@ const nextConfig = {
     // нужно для поддержки докера
     outputStandalone: true,
   },
-  env: {
-    // Необходимо для получения информации о курсах валют
-    NO_PROXY: '*.armbusinessbank.local, localhost',
-  },
+  env: {},
   reactStrictMode: true,
   // i18n: {
   //   // локали, которые поддерживаются приложением
