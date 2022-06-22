@@ -16,7 +16,9 @@ class MyDocument extends Document {
   render() {
     return (
       <Html>
-        <Head />
+        <Head>
+          <link rel="icon" href="/favicon.ico" />
+        </Head>
         <body>
           <Main />
           {/* Порталы рендерятся здесь при использования HOC/Portal */}

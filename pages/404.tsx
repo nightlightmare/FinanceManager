@@ -2,6 +2,8 @@ import React from 'react';
 import { NextPage } from 'next';
 import Head from 'next/head';
 
+import { Button, Result } from 'antd';
+import Link from 'next/link';
 import styles from './index.module.scss';
 
 const Page404: NextPage = () => (
@@ -10,9 +12,16 @@ const Page404: NextPage = () => (
       <title>Error 404</title>
     </Head>
 
-    <div className="main">
-      <h2>Error 404</h2>
-    </div>
+    <Result
+      status="404"
+      title="404"
+      subTitle="Страница не существует"
+      extra={(
+        <Link href="/dashboard">
+          <Button type="primary">Вернуться на главную</Button>
+        </Link>
+      )}
+    />
   </div>
 );
 

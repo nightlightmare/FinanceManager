@@ -10,13 +10,13 @@ const nextConfig = {
     NO_PROXY: '*.armbusinessbank.local, localhost',
   },
   reactStrictMode: true,
-  i18n: {
-    // локали, которые поддерживаются приложением
-    locales: ['en', 'ru', 'am'],
-    //  локаль по-умолчанию
-    defaultLocale: 'am',
-    localeDetection: true,
-  },
+  // i18n: {
+  //   // локали, которые поддерживаются приложением
+  //   locales: ['en', 'ru', 'am'],
+  //   //  локаль по-умолчанию
+  //   defaultLocale: 'am',
+  //   localeDetection: true,
+  // },
   webpack(config) {
     // Для того, чтобы можно было импортировать SVG в виде компонентов
     // TODO: сделать HOC для SVG чтобы можно было пробрасывать как минимум классы

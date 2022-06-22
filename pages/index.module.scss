@@ -3,3 +3,13 @@
 .container {
   @include container;
 }
+
+.logo {
+  margin: 16px 8px;
+  color: #fff;
+  text-align: center;
+
+  svg {
+    margin-right: 4px;
+  }
+}
