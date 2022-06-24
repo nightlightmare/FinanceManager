@@ -34,6 +34,9 @@
       ],
       "media": [
         "media"
+      ],
+      "store": [
+        "store"
       ]
     }
   },
