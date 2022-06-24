@@ -3,15 +3,9 @@ import { GetStaticProps, NextPage } from 'next';
 import Head from 'next/head';
 import { Localization } from 'types/localization';
 import { dictionary } from 'localization/dictionary';
-import {
-  Card,
-  Col,
-  PageHeader,
-  Row,
-} from 'antd';
-import Chart from 'react-google-charts';
+import { Col, PageHeader, Row } from 'antd';
 import BalanceBlock from 'components/BalanceBlock';
-import ExpensesBlock from 'components/ExpensesBlock';
+import CategoryChartBlock from 'components/CategoryChartBlock';
 
 import styles from './index.module.scss';
 
@@ -20,20 +14,27 @@ interface HomePageProps {
 }
 
 const HomePage: NextPage<HomePageProps> = () => {
-  const options = {
-    hAxis: { title: 'Age', viewWindow: { min: 0, max: 15 } },
-    vAxis: { title: 'Weight', viewWindow: { min: 0, max: 15 } },
-    legend: { position: 'none' },
-  };
+  const incomeData = [{
+    key: 1,
+    category: 'Зарплата',
+    amount: 1120.06,
+  },
+  {
+    key: 2,
+    category: 'Дивиденды',
+    amount: 10.46,
+  }];
 
-  const data2 = [
-    ['Task', 'Hours per Day'],
-    ['Work', 11],
-    ['Eat', 2],
-    ['Commute', 2],
-    ['Watch TV', 2],
-    ['Sleep', 7],
-  ];
+  const expenseData = [{
+    key: 1,
+    category: 'Еда домой',
+    amount: 20.06,
+  },
+  {
+    key: 2,
+    category: 'Еда в заведении',
+    amount: 10.46,
+  }];
 
   return (
     <>
@@ -55,18 +56,10 @@ const HomePage: NextPage<HomePageProps> = () => {
               <BalanceBlock />
             </Col>
             <Col xs={24} xxl={12}>
-              <ExpensesBlock />
+              <CategoryChartBlock data={expenseData} title="Категории расходов" />
             </Col>
             <Col xs={24} xxl={12}>
-              <Card title="Доходы по категориям">
-                <Chart
-                  chartType="Bar"
-                  data={data2}
-                  options={options}
-                  width="100%"
-                  height={400}
-                />
-              </Card>
+              <CategoryChartBlock data={incomeData} title="Категории доходов" />
             </Col>
           </Row>
         </div>

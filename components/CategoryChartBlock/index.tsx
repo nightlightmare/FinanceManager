@@ -9,23 +9,23 @@ import Chart from 'react-google-charts';
 
 import { BarChartOutlined, PieChartOutlined } from '@ant-design/icons';
 
-import styles from './ExpensesBlock.module.scss';
+import styles from './CategoryChartBlock.module.scss';
 
 type ChartTypes = 'PieChart' | 'Bar';
 
-const ExpensesBlock: React.FC = () => {
-  const [chartType, setChartType] = useState<ChartTypes>('PieChart');
+type CategoryAmountType = {
+  key: number;
+  category: string;
+  amount: number;
+};
 
-  const [data] = useState([{
-    key: 1,
-    category: 'Еда домой',
-    amount: 120.06,
-  },
-  {
-    key: 2,
-    category: 'Еда в заведении',
-    amount: 210.46,
-  }]);
+interface CategoryChartBlockProps {
+  data: CategoryAmountType[];
+  title: string;
+}
+
+const CategoryChartBlock: React.FC<CategoryChartBlockProps> = ({ data, title }) => {
+  const [chartType, setChartType] = useState<ChartTypes>('PieChart');
 
   const columns = [
     {
@@ -54,7 +54,7 @@ const ExpensesBlock: React.FC = () => {
   return (
     <Card title={(
       <div className={styles.header}>
-        <span>Расходы по категориям</span>
+        <span>{title}</span>
 
         <Switch
           checkedChildren={<PieChartOutlined />}
@@ -86,4 +86,4 @@ const ExpensesBlock: React.FC = () => {
   );
 };
 
-export default ExpensesBlock;
+export default CategoryChartBlock;
