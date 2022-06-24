@@ -8,13 +8,11 @@ import {
   Col,
   PageHeader,
   Row,
-  Switch,
 } from 'antd';
 import Chart from 'react-google-charts';
-
-import { BarChartOutlined, PieChartOutlined } from '@ant-design/icons';
-
 import BalanceBlock from 'components/BalanceBlock';
+import ExpensesBlock from 'components/ExpensesBlock';
+
 import styles from './index.module.scss';
 
 interface HomePageProps {
@@ -57,20 +55,7 @@ const HomePage: NextPage<HomePageProps> = () => {
               <BalanceBlock />
             </Col>
             <Col xs={24} xxl={12}>
-              <Card title="Расходы по категориям">
-                <Switch
-                  checkedChildren={<PieChartOutlined />}
-                  unCheckedChildren={<BarChartOutlined />}
-                  defaultChecked
-                />
-                <Chart
-                  chartType="PieChart"
-                  data={data2}
-                  options={options}
-                  width="100%"
-                  height={400}
-                />
-              </Card>
+              <ExpensesBlock />
             </Col>
             <Col xs={24} xxl={12}>
               <Card title="Доходы по категориям">
