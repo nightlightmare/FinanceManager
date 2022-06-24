@@ -5,6 +5,7 @@ import {
 } from 'react-redux';
 
 import userSliceReducer from './slices/userSlice';
+import categorySliceReducer from './slices/categorySlice';
 
 /**
  * Creates a store and includes all the slices as reducers.
@@ -12,6 +13,7 @@ import userSliceReducer from './slices/userSlice';
 export const store = configureStore({
   reducer: {
     user: userSliceReducer,
+    category: categorySliceReducer,
   },
 });
 

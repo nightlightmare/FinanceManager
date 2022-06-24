@@ -3,10 +3,15 @@ import { GetStaticProps, NextPage } from 'next';
 import Head from 'next/head';
 import { Localization } from 'types/localization';
 import { dictionary } from 'localization/dictionary';
-import { Col, PageHeader, Row } from 'antd';
+import {
+  Affix, Button, Col, PageHeader, Row,
+} from 'antd';
 import BalanceBlock from 'components/BalanceBlock';
 import CategoryChartBlock from 'components/CategoryChartBlock';
 
+import { FilterOutlined } from '@ant-design/icons';
+
+import Filter from 'components/Filter';
 import styles from './index.module.scss';
 
 interface HomePageProps {
@@ -65,6 +70,8 @@ const HomePage: NextPage<HomePageProps> = () => {
         </div>
 
       </div>
+
+      <Filter />
     </>
   );
 };
