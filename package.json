@@ -19,6 +19,7 @@
     "react": "18.1.0",
     "react-datepicker": "^4.8.0",
     "react-dom": "18.1.0",
+    "react-google-charts": "^4.0.0",
     "stylelint-webpack-plugin": "^3.3.0",
     "xml2js": "^0.4.23"
   },

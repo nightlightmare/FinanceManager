@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import Link from 'next/link';
 import type { AppProps } from 'next/app';
 import { useRouter } from 'next/router';
-import { Layout, Menu } from 'antd';
+import { Layout, Menu, Grid } from 'antd';
 import Sider from 'antd/lib/layout/Sider';
 import { Content, Footer } from 'antd/lib/layout/layout';
 
@@ -24,32 +24,37 @@ const items = [
 function MyApp({ Component, pageProps }: AppProps) {
   const { route } = useRouter();
 
+  const { useBreakpoint } = Grid;
+  const { sm, md } = useBreakpoint();
+
   // Для Админки не отрисовываем шапку и футер
   const isDashboard = useMemo(() => route.includes('dashboard'), [route]);
 
   if (isDashboard) {
     return (
       <Layout hasSider>
-        <Sider
-          style={{
-            overflow: 'auto',
-            height: '100vh',
-            position: 'fixed',
-            left: 0,
-            top: 0,
-            bottom: 0,
-          }}
-        >
-          <div className={styles.logo}>
-            <WalletOutlined />
-            <span>Finance Manager</span>
-          </div>
-          <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']} items={items} />
-        </Sider>
+        {sm && (
+          <Sider
+            style={{
+              overflow: 'auto',
+              height: '100vh',
+              position: 'fixed',
+              left: 0,
+              top: 0,
+              bottom: 0,
+            }}
+          >
+            <div className={styles.logo}>
+              <WalletOutlined />
+              <span>Finance Manager</span>
+            </div>
+            <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']} items={items} />
+          </Sider>
+        )}
         <Layout
           className="site-layout"
           style={{
-            marginLeft: 200,
+            marginLeft: sm ? 200 : 0,
             minHeight: '100vh',
           }}
         >
