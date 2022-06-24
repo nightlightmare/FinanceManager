@@ -13,6 +13,7 @@ import Chart from 'react-google-charts';
 import BalanceBlock from 'components/BalanceBlock';
 import ExpensesBlock from 'components/ExpensesBlock';
 
+import IncomeBlock from 'components/IncomeBlock';
 import styles from './index.module.scss';
 
 interface HomePageProps {
@@ -58,15 +59,7 @@ const HomePage: NextPage<HomePageProps> = () => {
               <ExpensesBlock />
             </Col>
             <Col xs={24} xxl={12}>
-              <Card title="Доходы по категориям">
-                <Chart
-                  chartType="Bar"
-                  data={data2}
-                  options={options}
-                  width="100%"
-                  height={400}
-                />
-              </Card>
+              <IncomeBlock />
             </Col>
           </Row>
         </div>
