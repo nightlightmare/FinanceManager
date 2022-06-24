@@ -25,7 +25,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   const { route } = useRouter();
 
   const { useBreakpoint } = Grid;
-  const { sm, md } = useBreakpoint();
+  const { sm } = useBreakpoint();
 
   // Для Админки не отрисовываем шапку и футер
   const isDashboard = useMemo(() => route.includes('dashboard'), [route]);
